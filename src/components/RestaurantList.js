@@ -6,13 +6,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {loadRestaurants} from '../store/restaurants/actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-export const RestaurantList = ({loadRestaurants, restaurants}) => {
+export const RestaurantList = ({loadRestaurants, restaurants, loading}) => {
   useEffect(() => {
     loadRestaurants();
   }, [loadRestaurants]);
   return (
     <>
-      <CircularProgress data-testid="loading-indicator" />
+      {loading && <CircularProgress data-testid="loading-indicator" />}
       <List>
         {restaurants.map(restaurant => (
           <ListItem key={restaurant.id}>

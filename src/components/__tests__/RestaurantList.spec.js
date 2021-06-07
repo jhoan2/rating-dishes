@@ -36,4 +36,9 @@ describe('RestaurantList', () => {
     const {queryByTestId} = context;
     expect(queryByTestId('loading-indicator')).not.toBeNull();
   });
+  it('does not display the loading indicator while not loading', () => {
+    renderWithProps({loading: false});
+    const {queryByTestId} = context;
+    expect(queryByTestId('loading-indicator')).toBeNull();
+  });
 });
