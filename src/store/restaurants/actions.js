@@ -17,4 +17,6 @@ export const loadRestaurants = () => (dispatch, getState, api) => {
 const recordLoadingError = () => ({type: RECORD_LOADING_ERROR});
 const startLoading = () => ({type: START_LOADING});
 const storeRestaurants = records => ({type: STORE_RESTAURANTS, records});
-export const createRestaurant = () => () => {};
+export const createRestaurant = name => (dispatch, getState, api) => {
+  api.createRestaurant(name);
+};
