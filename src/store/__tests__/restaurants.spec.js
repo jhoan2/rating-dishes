@@ -125,8 +125,23 @@ describe('restaurants', () => {
     });
 
     it('saves the restaurant to the server', () => {
+      api.createRestaurant.mockResolvedValue(responseRestaurant);
       store.dispatch(createRestaurant(newRestaurantName));
       expect(api.createRestaurant).toHaveBeenCalledWith(newRestaurantName);
+    });
+
+    describe('when save succeeds', () => {
+      beforeEach(() => {
+        api.createRestaurant.mockResolvedValue(responseRestaurant);
+        store.dispatch(createRestaurant(newRestaurantName));
+      });
+
+      it('stores the returned restaurant in the store', () => {
+        expect(store.getState().records).toEqual([
+          existingRestaurant,
+          responseRestaurant,
+        ]);
+      });
     });
   });
 });
