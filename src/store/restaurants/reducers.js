@@ -8,7 +8,8 @@ const records = (state = [], action) => {
       return state;
   }
 };
-
+const loading = () => true;
 export default combineReducers({
   records,
+  loading,
 });
