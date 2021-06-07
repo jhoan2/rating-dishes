@@ -1,10 +1,12 @@
+import {Provider} from 'react-redux';
+import store from './store';
 import RestaurantScreen from './components/RestaurantScreen';
-import RestaurantList from './RestaurantList';
+import RestaurantList from './components/RestaurantList';
 const App = () => (
-  <div>
+  <Provider store={store}>
     <RestaurantScreen />
     <RestaurantList />
-  </div>
+  </Provider>
 );
 
 export default App;
