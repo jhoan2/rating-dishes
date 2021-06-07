@@ -45,6 +45,7 @@ describe('restaurants', () => {
         expect(store.getState().loading).toEqual(false);
       });
     });
+
     describe('when loading fails', () => {
       let store;
 
@@ -53,7 +54,7 @@ describe('restaurants', () => {
           loadRestaurants: () => Promise.reject(),
         };
 
-        const initialState = {};
+        const initialState = {loadError: true};
 
         store = createStore(
           restaurantsReducer,
@@ -67,24 +68,36 @@ describe('restaurants', () => {
       it('sets an error flag', () => {
         expect(store.getState().loadError).toEqual(true);
       });
+      it('clears the loading flag', () => {
+        expect(store.getState().loading).toEqual(false);
+      });
     });
+
     describe('while loading', () => {
-      it('sets a loading flag', () => {
+      let store;
+
+      beforeEach(() => {
         const api = {
           loadRestaurants: () => new Promise(() => {}),
         };
 
         const initialState = {};
 
-        const store = createStore(
+        store = createStore(
           restaurantsReducer,
           initialState,
           applyMiddleware(thunk.withExtraArgument(api)),
         );
 
         store.dispatch(loadRestaurants());
+      });
 
+      it('sets a loading flag', () => {
         expect(store.getState().loading).toEqual(true);
+      });
+
+      it('clears the error flag', () => {
+        expect(store.getState().loadError).toEqual(false);
       });
     });
   });
