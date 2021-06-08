@@ -125,6 +125,13 @@ describe('NewRestaurantForm', () => {
       const {queryByText} = context;
       expect(queryByText(serverError)).not.toBeNull();
     });
+
+    it('does not clear the name', () => {
+      const {getByPlaceholderText} = context;
+      expect(getByPlaceholderText('Add Restaurant').value).toEqual(
+        restaurantName,
+      );
+    });
   });
 
   describe('when retrying after a server error', () => {
