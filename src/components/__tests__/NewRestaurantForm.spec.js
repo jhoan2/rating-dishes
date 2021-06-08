@@ -65,6 +65,7 @@ describe('NewRestaurantForm', () => {
       expect(queryByText(requiredError)).not.toBeNull();
     });
   });
+
   describe('when correcting a validation error', () => {
     beforeEach(async () => {
       createRestaurant.mockResolvedValue();
@@ -73,6 +74,7 @@ describe('NewRestaurantForm', () => {
 
       await userEvent.type(getByPlaceholderText('Add Restaurant'), '');
       userEvent.click(getByTestId('new-restaurant-submit-button'));
+      await act(flushPromises);
 
       await userEvent.type(
         getByPlaceholderText('Add Restaurant'),
